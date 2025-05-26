@@ -1,0 +1,7 @@
+Host *
+  IdentityAgent ~/.1password/agent.sock
+Host github.com
+  Hostname github.com
+  User git
+  IdentityFile ~/.ssh/id_github_personal
+  IdentitiesOnly yes
