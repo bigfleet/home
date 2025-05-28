@@ -10,3 +10,4 @@
 ## ROADMAP
 
 * age
+* 1password CLI integration on WSL
