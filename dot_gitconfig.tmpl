@@ -23,8 +23,6 @@
 {{- if eq .chezmoi.os "linux" -}}
     {{- if eq .chezmoi.hostname "forge" -}}
 # WSL-specific settings
-[credential]
-    helper = "/mnt/c/Program\\ Files/Git/mingw64/bin/git-credential-manager-core.exe"
 [gpg]
     program = "c:/Program Files (x86)/1Password/Agent/1Password.exe"
 {{- else -}}
