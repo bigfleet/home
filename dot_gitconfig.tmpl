@@ -1,5 +1,3 @@
-# ~/.local/share/chezmoi/dot_gitconfig.tmpl
-
 [user]
     name = Jim Van Fleet
     email = {{ .email | quote }}
@@ -9,6 +7,9 @@
 [core]
     autocrlf = input
     editor = code --wait
+{{ if contains "WSL" .chezmoi.kernel.osrelease }}
+    sshCommand = ssh.exe
+{{ end }}
 
 # Conditional includes for work/personal configurations
 # These paths WILL NOT be in your public chezmoi repo.
@@ -20,22 +21,22 @@
     path = ~/.gitconfig-personal
 
 # OS-specific settings
-{{- if eq .chezmoi.os "linux" -}}
-    {{- if eq .chezmoi.hostname "forge" -}}
+{{ if contains "WSL" .chezmoi.kernel.osrelease }}
 # WSL-specific settings
+[user]
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGpsQgEmLt2hvFEKbemp+BB2udAl7R/wAj2mI90RwM3U
+
 [gpg]
-    program = "c:/Program Files (x86)/1Password/Agent/1Password.exe"
-{{- else -}}
-# Native Linux settings (adjust if you use system-wide GPG/credential helpers)
-[credential]
-    helper = store # Or use gnome-keyring, etc.
-[gpg]
-    program = gpg # Standard GPG path
-    {{- end -}}
+  format = ssh
+
+[gpg "ssh"]
+  program = "/mnt/c/Users/Jim Van Fleet/AppData/Local/1Password/app/8/op-ssh-sign-wsl"
+
+[commit]
+  gpgsign = true
+
 {{- else if eq .chezmoi.os "darwin" -}}
 # macOS-specific settings
-[credential]
-    helper = osxkeychain
 [gpg]
-    program = /opt/homebrew/bin/gpg # Adjust if GPG is not via Homebrew or different path
+    program = /opt/homebrew/bin/gpg 
 {{- end -}}

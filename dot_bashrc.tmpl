@@ -1,7 +1,11 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
-
+{{ if contains "WSL" .chezmoi.kernel.osrelease }}
+export SSH_AUTH_SOCK="/mnt/wslg/runtime-dir/1password-agent.sock"
+alias ssh='ssh.exe'
+alias ssh-add='ssh-add.exe'
+{{ end }}
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
@@ -128,32 +132,3 @@ eval "$(atuin init bash)"
 if [ -d "$HOME/.local/bin" ] && [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
     export PATH="$HOME/.local/bin:$PATH"
 fi
-
-#
-# 1Password SSH Agent Integration (managed by chezmoi)
-#
-{{- if eq .chezmoi.os "linux" -}}
-    {{- if eq .chezmoi.hostname "forge" -}}
-# WSL-specific 1Password integration: uses Windows ssh.exe and pipes through
-export SSH_AUTH_SOCK=~/.1password/agent.sock
-alias ssh='ssh.exe'
-alias ssh-add='ssh-add.exe'
-{{ "" -}} # Forces a newline after the last alias
-    {{- else -}}
-# Native Linux 1Password integration (if you have the desktop app and agent there)
-# This block applies to non-WSL Linux machines.
-# Often, 1Password handles agent setup automatically here, or you might source
-# 'op plugin init --shell bash'.
-# echo "You haven't explicitly set up 1Password SSH for this Linux machine."
-    {{- end -}}
-{{- else if eq .chezmoi.os "darwin" -}}
-# macOS 1Password integration
-export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
-{{ "" -}} # Forces a newline after the last alias
-{{- else -}}
-# Generic / Other OS 1Password integration (e.g., if neither Linux nor macOS)
-# echo "You haven't explicitly set up 1Password SSH for this OS."
-{{ "" -}} # Forces a newline if this generic block is rendered
-{{- end -}}
-{{ "" -}} # Forces a newline
-
