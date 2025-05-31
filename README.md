@@ -2,8 +2,6 @@
 
 ## Desired components
 
-* asdf
-* direnv
 * rails
 
 
