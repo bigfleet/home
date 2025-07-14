@@ -21,22 +21,21 @@
     path = ~/.gitconfig-personal
 
 # OS-specific settings
-{{ if contains "WSL" .chezmoi.kernel.osrelease }}
-# WSL-specific settings
-[user]
-  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGpsQgEmLt2hvFEKbemp+BB2udAl7R/wAj2mI90RwM3U
-
-[gpg]
-  format = ssh
-
-[gpg "ssh"]
-  program = "/mnt/c/Users/Jim Van Fleet/AppData/Local/1Password/app/8/op-ssh-sign-wsl"
-
-[commit]
-  gpgsign = true
-
-{{- else if eq .chezmoi.os "darwin" -}}
+{{ if eq .chezmoi.os "darwin" -}}
 # macOS-specific settings
 [gpg]
-    program = /opt/homebrew/bin/gpg 
+    program = /opt/homebrew/bin/gpg
+{{- else if contains "WSL" .chezmoi.kernel.osrelease -}}
+# WSL-specific settings
+# Only include GPG signing if enableGpgSigning is true in chezmoi config
+{{ if .enableGpgSigning }}
+[user]
+    signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGpsQgEmLt2hvFEKbemp+BB2udAl7R/wAj2mI90RwM3U
+
+[gpg "ssh"]
+    program = "/mnt/c/Users/Jim Van Fleet/AppData/Local/1Password/app/8/op-ssh-sign-wsl"
+
+[commit]
+    gpgsign = true
+{{- end }} # End of if .enableGpgSigning
 {{- end -}}
