@@ -15,7 +15,7 @@ fi
 # List of extensions to install
 extensions=(
     # AI assistance
-    "anthropic.claude-dev"
+    "anthropic.claude-code"
 
     # Python development
     "ms-python.python"
