@@ -13,8 +13,12 @@ fi
 
 echo "direnv not found. Installing..."
 
-# Update apt cache and install direnv
-sudo apt update
-sudo apt install -y direnv
+if command -v dnf &> /dev/null; then
+  sudo dnf install direnv
+elif command -v apt &> /dev/null; then
+  # Update apt cache and install direnv
+  sudo apt update
+  sudo apt install -y direnv
+fi
 
 echo "direnv installation complete."
