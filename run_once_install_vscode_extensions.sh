@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Skip on WSL - use Windows host VSCode
+if grep -qi microsoft /proc/version 2>/dev/null; then
+    echo "WSL detected - skipping VSCode extensions (use Windows host version)"
+    exit 0
+fi
+
 # Check if code is installed
 if ! command -v code &> /dev/null; then
     echo "VSCode is not installed, skipping extensions"
