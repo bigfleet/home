@@ -1,9 +1,8 @@
 Host *{{ if contains "WSL" .chezmoi.kernel.osrelease }}
   IdentityAgent /mnt/wslg/runtime-dir/1password-agent.sock
-{{- else -}}
+{{- else }}
   IdentityAgent ~/.1password/agent.sock
-{{ end }}
+{{- end }}
 Host github.com
   Hostname github.com
   User git
-  IdentitiesOnly yes
