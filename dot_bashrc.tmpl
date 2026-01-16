@@ -121,14 +121,19 @@ if ! shopt -oq posix; then
   fi
 fi
 
-. "$HOME/.asdf/asdf.sh"
-. "$HOME/.asdf/completions/asdf.bash"
+# asdf (Go version 0.16+)
+export PATH="$HOME/.asdf/bin:$PATH"
 
-source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/bashrc"
+# asdf-direnv integration (if installed)
+if [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/bashrc" ]; then
+    source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/bashrc"
+fi
 
-[[ -f ~/.bash-preexec.sh ]] && source ~/.bash-preexec.sh
-
-eval "$(atuin init bash)"
+# Atuin shell history (if installed)
+if command -v atuin &> /dev/null; then
+    [[ -f ~/.bash-preexec.sh ]] && source ~/.bash-preexec.sh
+    eval "$(atuin init bash)"
+fi
 
 if [ -d "$HOME/.local/bin" ] && [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
     export PATH="$HOME/.local/bin:$PATH"
