@@ -9,15 +9,24 @@ if [ -d "$ASDF_DIR" ]; then
     exit 0
 fi
 
-echo "Latest asdf tag found: $ASDF_VERSION"
-echo "Checking for asdf installation..."
+echo "Installing asdf $ASDF_VERSION..."
+echo "Downloading release binary..."
 
-if ! command -v asdf &> /dev/null; then
-    echo "asdf not found. Installing..."
-    git clone https://github.com/asdf-vm/asdf.git "$ASDF_DIR" --branch "$ASDF_VERSION"
-    cd "$ASDF_DIR"
-    make  # This builds the Go binary!
-    echo "asdf installation complete. Please run 'chezmoi apply' again or open a new terminal to ensure .bashrc is sourced."
+# Detect architecture
+ARCH=$(uname -m)
+if [ "$ARCH" = "x86_64" ]; then
+    ASDF_ARCH="amd64"
+elif [ "$ARCH" = "aarch64" ]; then
+    ASDF_ARCH="arm64"
 else
-    echo "asdf is already installed."
+    echo "Unsupported architecture: $ARCH"
+    exit 1
 fi
+
+# Download and extract
+curl -L "https://github.com/asdf-vm/asdf/releases/download/${ASDF_VERSION}/asdf-${ASDF_VERSION}-linux-${ASDF_ARCH}.tar.gz" -o /tmp/asdf.tar.gz
+mkdir -p "$ASDF_DIR"
+tar -xzf /tmp/asdf.tar.gz -C "$ASDF_DIR"
+rm /tmp/asdf.tar.gz
+
+echo "asdf installation complete. Please run 'chezmoi apply' again or open a new terminal to ensure .bashrc is sourced."
