@@ -34,6 +34,7 @@ cask "alfred"
 cask "sizeup"
 cask "bartender"
 cask "microsoft-office"
+mas "UpNote", id: 1398373917
 
 # Communication
 mas "Slack", id: 803453959
