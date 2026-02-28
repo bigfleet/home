@@ -12,7 +12,7 @@ if command -v dnf &> /dev/null; then
         gcc make \
         openssl-devel libyaml-devel readline-devel zlib-devel libffi-devel \
         gdbm-devel ncurses-devel \
-        bzip2-devel sqlite-devel xz-devel
+        bzip2-devel sqlite-devel xz-devel tk-devel
 elif command -v apt-get &> /dev/null; then
     # Debian / Ubuntu
     sudo apt-get update
