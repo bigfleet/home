@@ -11,7 +11,9 @@ if command -v dnf &> /dev/null; then
         bats \
         tree \
         lshw \
-        dos2unix
+        dos2unix \
+        wget1 \
+        wget1-wget
 elif command -v apt-get &> /dev/null; then
     sudo apt-get update
     sudo apt-get install -y \
