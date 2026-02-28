@@ -1,0 +1,45 @@
+# Core tools (also installed via run_once on Linux)
+brew "chezmoi"
+brew "git"
+brew "asdf"
+brew "direnv"
+brew "tree"
+brew "jq"
+brew "dos2unix"
+
+# Shell
+brew "zsh"
+brew "atuin"
+brew "most"
+
+# Containers
+brew "podman"
+brew "podman-compose"
+cask "podman-desktop"
+
+# 1Password
+cask "1password"
+cask "1password-cli"
+
+# Browsers
+cask "firefox"
+cask "google-chrome"
+
+# Development
+cask "visual-studio-code"
+cask "iterm2"
+
+# Productivity
+cask "alfred"
+cask "sizeup"
+cask "bartender"
+cask "microsoft-office"
+
+# Communication
+mas "Slack", id: 803453959
+
+# Apple suite
+mas "Keynote", id: 409183694
+mas "Numbers", id: 409203825
+mas "Pages", id: 409201541
+mas "XCode", id: 497799835

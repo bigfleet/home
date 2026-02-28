@@ -1,0 +1,10 @@
+{{ if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+
+# Brewfile hash: {{ include "dot_Brewfile" | sha256sum }}
+# Re-runs automatically whenever the Brewfile changes
+
+echo "Running brew bundle..."
+brew bundle --global --no-lock
+echo "brew bundle complete"
+{{ end -}}
