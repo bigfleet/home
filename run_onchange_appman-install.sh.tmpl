@@ -1,0 +1,25 @@
+{{ if ne .chezmoi.os "darwin" -}}
+#!/bin/bash
+
+# Apps list hash: {{ include "dot_config/appman/appman-apps" | sha256sum }}
+# Re-runs automatically whenever the apps list changes
+
+if ! command -v appman &> /dev/null; then
+    echo "AppMan not installed - skipping app installation"
+    exit 0
+fi
+
+echo "Installing AppMan apps..."
+
+while read -r app; do
+    [ -z "$app" ] && continue
+    if appman list 2>/dev/null | grep -q "^$app$"; then
+        echo "$app already installed"
+    else
+        echo "Installing $app..."
+        appman install "$app"
+    fi
+done < "$HOME/.config/appman/appman-apps"
+
+echo "AppMan apps configured"
+{{ end -}}
