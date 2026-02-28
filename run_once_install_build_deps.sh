@@ -20,7 +20,7 @@ elif command -v apt-get &> /dev/null; then
         gcc make \
         libssl-dev libyaml-dev libreadline-dev zlib1g-dev libffi-dev \
         libgdbm-dev libncurses-dev \
-        libbz2-dev libsqlite3-dev liblzma-dev
+        libbz2-dev libsqlite3-dev liblzma-dev tk-dev python3-tk
 else
     echo "Unsupported package manager - install build deps manually"
     exit 1
