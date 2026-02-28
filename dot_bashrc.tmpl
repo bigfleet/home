@@ -121,8 +121,8 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# asdf (Go version 0.16+)
-export PATH="$HOME/.asdf:$PATH"
+# asdf (Go binary, v0.18+)
+export PATH="$HOME/.asdf/shims:$HOME/.asdf:$PATH"
 
 # asdf-direnv integration (if installed)
 if [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/bashrc" ]; then

@@ -23,6 +23,7 @@ extensions=(
     
     # Remote development
     "ms-vscode-remote.remote-ssh"
+    "ms-vscode-remote.remote-containers"
     
     # Git
     "eamodio.gitlens"

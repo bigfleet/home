@@ -1,5 +1,5 @@
 [user]
-    name = Jim Van Fleet
+    name = {{ .name }}
     email = {{ .email | quote }}
 [init]
     defaultBranch = main
@@ -12,8 +12,7 @@
 {{ end }}
 
 # Conditional includes for work/personal configurations
-# These paths WILL NOT be in your public chezmoi repo.
-# You will create them manually on each machine.
+# These files are managed by chezmoi and populated from init-time prompts.
 [includeIf "gitdir:~/src/work/"]
     path = ~/.gitconfig-work
 

@@ -1,0 +1,5 @@
+[data]
+  email = {{ promptStringOnce . "email" "Primary email address" | quote }}
+  name = {{ promptStringOnce . "name" "Full name" | quote }}
+  work_name = {{ promptStringOnce . "work_name" "Work git name (for ~/src/work/)" | quote }}
+  work_email = {{ promptStringOnce . "work_email" "Work git email (for ~/src/work/)" | quote }}
