@@ -6,7 +6,9 @@
 echo "Installing baseline packages..."
 
 if command -v dnf &> /dev/null; then
-    sudo dnf install -y --skip-unavailable \
+    # --allowerasing: Fedora 43+ ships wget2-wget by default;
+    # AppMan requires classic wget (wget1), so allow dnf to swap it.
+    sudo dnf install -y --skip-unavailable --allowerasing \
         git \
         bats \
         tree \
