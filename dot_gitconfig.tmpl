@@ -34,6 +34,20 @@
 [commit]
   gpgsign = true
 
+{{- else if eq .chezmoi.os "linux" }}
+# Fedora/Linux-specific settings (1Password SSH signing)
+[user]
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGpsQgEmLt2hvFEKbemp+BB2udAl7R/wAj2mI90RwM3U
+
+[gpg]
+  format = ssh
+
+[gpg "ssh"]
+  program = /opt/1Password/op-ssh-sign
+
+[commit]
+  gpgsign = true
+
 {{- else if eq .chezmoi.os "darwin" -}}
 # macOS-specific settings
 [gpg]
