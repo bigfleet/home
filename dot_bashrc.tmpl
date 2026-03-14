@@ -5,7 +5,9 @@
 export SSH_AUTH_SOCK="/mnt/wslg/runtime-dir/1password-agent.sock"
 alias ssh='ssh.exe'
 alias ssh-add='ssh-add.exe'
-alias op='/mnt/c/Program\ Files/1Password\ CLI/op.exe'
+{{ if stat "/mnt/c/Users/Jim Van Fleet/AppData/Local/Microsoft/WinGet/Links/op.exe" -}}
+alias op='/mnt/c/Users/Jim\ Van\ Fleet/AppData/Local/Microsoft/WinGet/Links/op.exe'
+{{ end -}}
 {{ end }}
 # If not running interactively, don't do anything
 case $- in
