@@ -126,9 +126,9 @@ fi
 # asdf (Go binary, v0.18+)
 export PATH="$HOME/.asdf/shims:$HOME/.asdf:$PATH"
 
-# asdf-direnv integration (if installed)
-if [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/bashrc" ]; then
-    source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/bashrc"
+# direnv hook (asdf-direnv was retired in asdf 0.18; canonical hook here)
+if command -v direnv &> /dev/null; then
+    eval "$(direnv hook bash)"
 fi
 
 # Atuin shell history (if installed)
